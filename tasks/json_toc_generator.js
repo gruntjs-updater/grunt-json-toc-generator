@@ -27,11 +27,13 @@ module.exports = function(grunt) {
   }
 
   function getMarkdownTitle(body) {
+    var matched = null;
     body.split('\n').forEach(function (line) {
-      if (line.lastIndexOf('#', 0) === 0) {
-        return line.substring(1).trim();
+      if (matched === null) {
+        matched = line.match(/\s?#{1}[^#](.*)$/g)[0].substr(1).trim();
       }
     });
+    return matched;
   }
 
   function getHtmlTitle(body) {
@@ -63,6 +65,8 @@ module.exports = function(grunt) {
         if (doc.extension === 'html') {
           doc.title = getHtmlTitle(body);
         }
+
+        console.log("doc : " + JSON.stringify(doc));
 
         docs.push(doc);
 
