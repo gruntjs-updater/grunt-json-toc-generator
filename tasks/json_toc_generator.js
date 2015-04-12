@@ -9,6 +9,7 @@
 'use strict';
 
 var cheerio = require('cheerio');
+var filepath = require('parse-filepath');
 
 module.exports = function(grunt) {
 
@@ -51,23 +52,18 @@ module.exports = function(grunt) {
 
       fileGroup.src.forEach(function(file) {
 
-        var doc = {};
+        var doc = filepath(file);
         var body = grunt.file.read(file);
 
-
-        doc.extension = file.split('.').pop();
-        doc.name = file.split('/').pop();
-
-        if (doc.extension === 'md' || doc.extension === 'markdown') {
+        if (doc.extname === '.md' || doc.extname === '.markdown') {
           doc.title = getMarkdownTitle(body);
         }
 
-        if (doc.extension === 'html') {
+        if (doc.extname === '.html') {
           doc.title = getHtmlTitle(body);
         }
 
         console.log("doc : " + JSON.stringify(doc));
-
         docs.push(doc);
 
       });
