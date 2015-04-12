@@ -1,7 +1,7 @@
 {
   "name": "grunt-json-toc-generator",
   "description": "A Grunt plugin to generate a json table of contents file from a file structure.",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "homepage": "https://github.com/jediq/grunt-json-toc-generator",
   "author": {
     "name": "Ricky Walker",
